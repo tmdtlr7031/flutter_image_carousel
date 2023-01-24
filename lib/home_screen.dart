@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -8,6 +10,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+
+    timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      print('Timer!');
+    });
+  }
+
+  @override
+  void dispose() {
+    // 생명주기에 따라 state가 사라질 때 타이머도 끝나게 설정
+    if (timer != null) {
+      timer!.cancel();
+    }
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
